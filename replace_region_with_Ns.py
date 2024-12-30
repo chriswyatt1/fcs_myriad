@@ -1,5 +1,6 @@
 import argparse
 from Bio import SeqIO
+from Bio.Seq import Seq
 
 def replace_region_with_ns(fasta_file, output_file, scaffold, start, end):
     start -= 1  # Convert to 0-based index (Python uses 0-based indexing)
@@ -8,7 +9,7 @@ def replace_region_with_ns(fasta_file, output_file, scaffold, start, end):
             if record.id == scaffold:
                 sequence = list(str(record.seq))
                 sequence[start:end] = ['N'] * (end - start)
-                record.seq = ''.join(sequence)
+                record.seq = Seq(''.join(sequence))  # Ensure record.seq is a Seq object
             SeqIO.write(record, output_handle, "fasta")
 
 def main():
