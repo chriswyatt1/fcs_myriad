@@ -36,3 +36,22 @@ python3 ./fcs.py screen genome --fasta input/B_impatiens_GenomeSoftmasked.fa.gz 
 ```
 
 In the above, you need to specify the species tax ID (get this from NCBI or other DB).
+
+# Replace contaminant regions with Ns
+
+Use the python script to replace the contaminant or adaptor regions, when they represent just a small internal sequence and HiC shows that the two side either side of the contaminant are indeed connected:
+
+## How to Use the Script:
+
+Save the script to a file, e.g., replace_region.py. Make sure you chmod it, `chmod a+x replace_region.py`
+
+Run the script from the command line with the required arguments:
+
+`python replace_region.py input.fasta output.fasta HiC_scaffold_1 66580289 66614171`
+input.fasta: Path to the input FASTA file.
+output.fasta: Path to save the modified FASTA file.
+HiC_scaffold_1: Name of the scaffold where the replacement will occur.
+66580289: Start position of the region to replace (1-based).
+66614171: End position of the region to replace (1-based).
+
+
